@@ -1,0 +1,72 @@
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/28/12 09:21:22
+Add and Subtract              (AddSubR.asm)		     Page 1 - 1
+
+
+				TITLE Add and Subtract              (AddSubR.asm)
+
+				; This program adds and subtracts 32-bit integers.
+				; 16-bit Real mode version.
+				; Last update: 2/1/02
+
+				.MODEL small,stdcall
+				.STACK 4096
+				.386
+
+				DumpRegs PROTO
+
+ 0000				.code
+ 0000				main PROC
+ 0000  B8 ---- R			mov ax,@data		; data seg address
+ 0003  8E D8				mov ds,ax		; copy to DS
+ 0005  8E C0				mov es,ax		; copy to ES
+
+ 0007  66| B8 00010000			mov eax,10000h		; EAX = 10000h
+ 000D  66| 05 00040000			add eax,40000h		; EAX = 50000h
+ 0013  66| 2D 00020000			sub eax,20000h		; EAX = 30000h
+ 0019  E8 0000 E			call DumpRegs
+
+ 001C  B4 4C				mov ah,4Ch		; exit process
+ 001E  B0 00				mov al,0		; return code = 0
+ 0020  CD 21				int 21h		; call MS-DOS function
+ 0022				main ENDP
+				END main
+Microsoft (R) Macro Assembler Version 6.15.8803		    09/28/12 09:21:22
+Add and Subtract              (AddSubR.asm)		     Symbols 2 - 1
+
+
+
+
+Segments and Groups:
+
+                N a m e                 Size     Length   Align   Combine Class
+
+DGROUP . . . . . . . . . . . . .	GROUP
+_DATA  . . . . . . . . . . . . .	16 Bit	 0000	  Word	  Public  'DATA'	
+STACK  . . . . . . . . . . . . .	16 Bit	 1000	  Para	  Stack	  'STACK'	 
+_TEXT  . . . . . . . . . . . . .	16 Bit	 0022	  Word	  Public  'CODE'	
+
+
+Procedures,  parameters and locals:
+
+                N a m e                 Type     Value    Attr
+
+DumpRegs . . . . . . . . . . . .	P Near	 0000	  Length= 0000 External STDCALL
+main . . . . . . . . . . . . . .	P Near	 0000	  _TEXT	Length= 0022 Public STDCALL
+
+
+Symbols:
+
+                N a m e                 Type     Value    Attr
+
+@CodeSize  . . . . . . . . . . .	Number	 0000h	 
+@DataSize  . . . . . . . . . . .	Number	 0000h	 
+@Interface . . . . . . . . . . .	Number	 0003h	 
+@Model . . . . . . . . . . . . .	Number	 0002h	 
+@code  . . . . . . . . . . . . .	Text   	 _TEXT
+@data  . . . . . . . . . . . . .	Text   	 DGROUP
+@fardata?  . . . . . . . . . . .	Text   	 FAR_BSS
+@fardata . . . . . . . . . . . .	Text   	 FAR_DATA
+@stack . . . . . . . . . . . . .	Text   	 DGROUP
+
+	   0 Warnings
+	   0 Errors
